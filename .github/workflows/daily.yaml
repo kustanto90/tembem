@@ -1,5 +1,8 @@
 name: Daily
 on:
+  push:
+    paths-ignore:
+      - 'data/**'
   schedule:
     - cron: '10 12 * * 1-5'
   workflow_dispatch:
