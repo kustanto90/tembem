@@ -1,0 +1,15 @@
+{
+  "name": "github-trending-daily",
+  "version": "0.0.1",
+  "description": "Get Github Trending items",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Bagdasarian",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^5.0.0"
+  }
+}
