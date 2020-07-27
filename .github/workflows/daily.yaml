@@ -2,12 +2,14 @@ name: Daily
 on:
   schedule:
     - cron: '10 12 * * 1-5'
-  workflow_dispatch
+  workflow_dispatch:
+    tags:
+      description: 'manual run'
 jobs:
   scrape-daily-and-add-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Get current date
+      - name: Set current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Checkout

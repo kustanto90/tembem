@@ -10,7 +10,7 @@ const datapath = './data';
 
 const main = async () => {
     let browser;
-    if(process.env.GITHUB_ACTION) {
+    if(process.env.GITHUB_ACTIONS) {
         browser = await pptr.launch({executablePath: githubActionBrowserInstall, args: ['--no-sandbox']})
     } else {
         browser = await pptr.launch({executablePath: localBrowserInstall});
