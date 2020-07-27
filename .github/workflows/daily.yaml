@@ -3,8 +3,15 @@ on:
   push:
     paths-ignore:
       - 'data/**'
+    branches-ignore:
+      - 'master'
+      - 'new-data'
+  pull_request:
+    branches-ignore:
+      - 'master'
+      - 'new-data'
   schedule:
-    - cron: '10 12 * * 1-5'
+    - cron: '05 19 * * 1-5'
   workflow_dispatch:
     inputs:
       tags:
