@@ -30,7 +30,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: [create-pull-request] Add data for ${{ steps.date.outputs.date }}
-          branch: add-data/${{ steps.date.outputs.date }}
+          branch: add-data
           title: '[Create Pull Request] Add new data'
           body: |
             Added new data for ${{ steps.date.outputs.date }}
