@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Github Trending Daily</title>
+</head>
+<body>
+<div id="input">
+    <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />
+    <script>
+        function buildView() {
+            let display = document.getElementById("display");
+            if(!display) {
+                display = document.createElement("div");
+                display.id = "display";
+                document.body.appendChild(display);
+            } else {
+                display.innerHTML = "";
+            }
+            Object.keys(data).forEach((key) => {
+                let header = document.createElement("h1");
+                header.textContent = key;
+                let items = document.createElement("ul");
+                data[key].forEach((item) => {
+                    let list = document.createElement("li");
+                    let container = document.createElement("div");
+                    let link = document.createElement("a");
+                    if(key === 'trending') {
+                        link.textContent = `[${item.programmingLanguage}] ${item.repository}`;
+                    } else {
+                        link.textContent = item.repository;
+                    }
+                    link.href = `https://github.com/${item.repository}/`;
+                    container.appendChild(link);
+                    let desc = document.createElement("p");
+                    desc.textContent = item.description;
+                    container.appendChild(desc);
+                    list.appendChild(container);
+                    items.appendChild(list);
+                });
+                let div = document.createElement("div");
+                div.appendChild(header);
+                div.appendChild(items);
+                display.appendChild(div);
+            });
+        }
+
+        let files = [];
+        let filepaths = {};
+        let data = {};
+        document.getElementById("filepicker").addEventListener("change", function(event) {
+            files = event.target.files;
+            let select = document.createElement("select");
+            select.id = "selector";
+            select.addEventListener("change", function(event) {
+                let path = event.target.value;
+                const reader = new FileReader();
+                reader.addEventListener("loadend", function(e) {
+                    data = JSON.parse(reader.result);
+                    buildView();
+                });
+                reader.readAsText(filepaths[path])
+            }, false);
+            for (let i = 0; i < files.length; i++) {
+                if(files[i].webkitRelativePath.split(".")[1] === 'json') {
+                    let option = document.createElement("option");
+                    option.innerHTML = files[i].webkitRelativePath;
+                    option.value = files[i].webkitRelativePath;
+                    select.appendChild(option);
+                    filepaths[files[i].webkitRelativePath] = files[i];
+                }
+            }
+            document.getElementById("filepicker").remove();
+            document.getElementById("input").appendChild(select);
+        }, false);
+    </script>
+</div>
+</body>
+</html>
