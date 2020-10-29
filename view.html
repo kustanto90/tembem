@@ -49,7 +49,7 @@
         let filepaths = {};
         let data = {};
         document.getElementById("filepicker").addEventListener("change", function(event) {
-            files = event.target.files;
+            files = makeArray(event.target.files).sort((f1, f2) => f1.name.localeCompare(f2.name));
             let select = document.createElement("select");
             select.id = "selector";
             select.addEventListener("change", function(event) {
@@ -73,6 +73,14 @@
             document.getElementById("filepicker").remove();
             document.getElementById("input").appendChild(select);
         }, false);
+
+        function makeArray(arrLike) {
+            let arr = [];
+            for(let i = 0; i < arrLike.length; i++) {
+                arr.push(arrLike[i]);
+            }
+            return arr;
+        }
     </script>
 </div>
 </body>
