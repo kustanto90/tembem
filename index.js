@@ -1,7 +1,12 @@
 console.time('runtime');
 
+const os = require('os');
+let localBrowserInstall = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+if(os.type() === 'Linux') {
+    localBrowserInstall = '/usr/bin/chromium';
+}
+
 const pptr = require('puppeteer-core');
-const localBrowserInstall = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const githubActionBrowserInstall = 'google-chrome-stable';
 
 const baseUrl = 'https://github.com/trending/';
@@ -59,6 +64,10 @@ const main = async () => {
         JSON.stringify(json),
         (err) => err ? console.error(err) : console.timeEnd('runtime')
     )
+    //Solves #75
+    fs.writeFile(`${datapath}/latest.json`,
+        JSON.stringify(json),
+        (err) => {if(err) {console.error(err)}})
 };
 
 
