@@ -1,4 +1,4 @@
-name: Daily
+name: Generate Static Site
 on:
   push:
     branches-ignore:
