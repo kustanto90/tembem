@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          - ref: 'static-site'
+          ref: 'static-site'
       - name: Setup Node.js
         uses: setup-node@v1
         with:
