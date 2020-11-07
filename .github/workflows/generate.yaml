@@ -17,10 +17,11 @@ jobs:
       - name: Set current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: Checkout
+      - name: Checkout static-site branch
         uses: actions/checkout@v2
         with:
           ref: 'static-site'
+      - name: Checkout data from master
         run: git checkout master -- data/
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -31,7 +32,6 @@ jobs:
       - name: Generate Next.js Site
         run: npm run build-gh-pages
       - name: Push Changes
-        use: actions/checkout@v2
         run: |
           git add public/ docs/
           git commit -m "Add data for ${{ steps.date.outputs.date }}"
