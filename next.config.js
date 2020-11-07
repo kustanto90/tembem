@@ -1,4 +1,4 @@
-const repo_url = 'github-daily-trending'
+const repo_url = 'github-trending-daily'
 
 module.exports = {
     basePath: `/${repo_url}`,
