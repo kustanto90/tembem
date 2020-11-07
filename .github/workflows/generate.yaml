@@ -17,10 +17,12 @@ jobs:
       - name: Set current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: Checkout static-site branch
-        run: git clone -b static-site https://github.com/ahappypie/github-trending-daily
-      - name: Checkout data from master
-        run: cd github-trending-daily && git checkout master -- data/
+      - name: Checkout
+        run: |
+          git clone https://github.com/ahappypie/github-trending-daily
+          cd github-trending-daily
+          git checkout static-site
+          git checkout master -- data/
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
