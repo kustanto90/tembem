@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "build-gh-pages": "git checkout master -- data/ && rm -r ./public/ && cp -r ./data/ ./public/ && rm -r ./data/ && next build && next export -o ./docs/",
+    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && rm -r ./data/ && next build && next export -o ./docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bagdasarian",
