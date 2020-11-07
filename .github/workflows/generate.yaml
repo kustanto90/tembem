@@ -18,9 +18,7 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Checkout static-site branch
-        uses: actions/checkout@v2
-        with:
-          ref: 'static-site'
+        run: git clone -b static-site https://github.com/ahappypie/github-trending-daily && cd github-trending-daily
       - name: Checkout data from master
         run: git checkout master -- data/
       - name: Setup Node.js
