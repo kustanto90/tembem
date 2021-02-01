@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "checkout": "git checkout master -- data",
     "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && rm -r ./data/ && next build && next export -o ./docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
