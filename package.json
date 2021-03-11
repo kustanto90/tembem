@@ -4,12 +4,18 @@
   "description": "Get Github Trending items",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "checkout": "git checkout master -- data",
+    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && rm -r ./data/ && next build && next export -o ./docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bagdasarian",
   "license": "MIT",
   "dependencies": {
-    "puppeteer-core": "^5.0.0"
+    "next": "^10.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
