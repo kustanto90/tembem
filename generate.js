@@ -1,17 +1,7 @@
 console.time('runtime');
 
-const os = require('os');
-let localBrowserInstall = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-if(os.type() === 'Linux') {
-    localBrowserInstall = '/usr/bin/chromium';
-}
-
+const {localBrowserInstall, githubActionBrowserInstall, baseUrl, languages, datapath, year, month, day} = require('./constants');
 const pptr = require('puppeteer-core');
-const githubActionBrowserInstall = 'google-chrome-stable';
-
-const baseUrl = 'https://github.com/trending/';
-const languages = ['', 'java', 'scala', 'kotlin', 'swift', 'python', 'javascript', 'typescript', 'go', 'rust'];
-const datapath = './data';
 
 const main = async () => {
     let browser;
@@ -56,8 +46,6 @@ const main = async () => {
     let json = {};
     d.forEach(page => json[page.heading] = page.items);
 
-    const dateTimeFormat = new Intl.DateTimeFormat('en', {year: 'numeric', month: '2-digit', day: '2-digit' });
-    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat.formatToParts(new Date());
     const filename = `${year}-${month}-${day}.json`;
     const fs = require('fs');
     fs.writeFile(`${datapath}/${filename}`,

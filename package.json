@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
+    "generate": "node generate.js",
+    "verify": "node verify.js",
     "build": "next build",
     "start": "next start",
-    "checkout": "git checkout master -- data",
-    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && rm -r ./data/ && next build && next export -o ./docs/",
+    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && next build && next export -o ./docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bagdasarian",
@@ -16,6 +17,7 @@
   "dependencies": {
     "next": "^10.0.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "puppeteer-core": "^8.0.0"
   }
 }

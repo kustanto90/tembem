@@ -1,19 +1,7 @@
 name: Daily
 on:
-  push:
-    paths-ignore:
-      - 'data/**'
-    branches-ignore:
-      - 'master'
-      - 'new-data'
-      - 'static-site'
-  pull_request:
-    branches-ignore:
-      - 'master'
-      - 'new-data'
-      - 'static-site'
-  schedule:
-    - cron: '05 20 * * 1-5'
+  #schedule:
+    #- cron: '05 20 * * 1-5'
   workflow_dispatch:
     inputs:
       tags:
@@ -37,7 +25,15 @@ jobs:
       - name: Run
         uses: ianwalter/puppeteer-container@v4.0.0
         with:
-          args: npm run start
+          args: npm run generate
+      - name: Verify
+        uses: ianwalter/puppeteer-container@v4.0.0
+        with:
+          args: npm run verify
+      - name: Build Static Site
+        uses: ianwalter/puppeteer-container@v4.0.0
+        with:
+          args: npm run build-gh-pages
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
