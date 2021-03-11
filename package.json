@@ -9,7 +9,8 @@
     "verify": "node verify.js",
     "build": "next build",
     "start": "next start",
-    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && next build && next export -o ./docs/",
+    "build-gh-pages": "rm -r ./public/ && cp -r ./data/ ./public/ && next build && next export -o ./docs/ && touch ./docs/.nojekyll",
+    "aio": "npm run generate && npm run verify && npm run build-gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bagdasarian",
