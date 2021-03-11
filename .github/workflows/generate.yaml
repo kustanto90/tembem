@@ -1,0 +1,45 @@
+name: Generate Static Site
+on:
+  push:
+    branches-ignore:
+      - 'new-data'
+  pull_request:
+    branches-ignore:
+      - 'new-data'
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Reason for manual run'
+jobs:
+  generate-static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Checkout
+        run: |
+          git clone https://github.com/ahappypie/github-trending-daily
+          cd github-trending-daily
+          git checkout static-site
+          git checkout master -- data/
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '15.0.1'
+      - name: Install Dependencies
+        run: |
+          cd github-trending-daily
+          npm ci
+      - name: Generate Next.js Site
+        run: |
+          cd github-trending-daily
+          npm run build-gh-pages
+      - name: Push Changes
+        run: |
+          cd github-trending-daily
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add public/ docs/
+          git commit -m "Add data for ${{ steps.date.outputs.date }}"
+          git push
