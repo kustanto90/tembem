@@ -10,7 +10,7 @@ function Home({links}) {
                     <Link href={`/trending/${encodeURIComponent(file)}`}>
                         <a>{file}</a>
                     </Link>
-                    (<a href={`/${encodeURIComponent(file)}.json`}>raw</a>)
+                    (<Link href={`/${encodeURIComponent(file)}.json`}><a>raw</a></Link>)
                 </li>
             ))}
         </ul>
